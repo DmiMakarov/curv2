@@ -1,0 +1,115 @@
+#!/bin/bash
+
+end1=".vtk"
+end2=".txt"
+inpCircleUni="meshes/circles/circle_uni_n"
+inpCircleUnipert="meshes/circles/circle_unipert_n"
+inpCircleGauss="meshes/circles/circle_gauss_n"
+
+inpEllipseUni="meshes/ellipses/ellipse_uni_n"
+inpEllipseUnipert="meshes/ellipses/ellipse_unipert_n"
+inpEllipseGauss="meshes/ellipses/ellipse_gauss_n"
+
+inpDeltaUni="meshes/deltas/delta_uni_n"
+inpDeltaUnipert="meshes/deltas/delta_unipert_n"
+inpDeltaGauss="meshes/deltas/delta_gauss_n"
+
+inpSpiralUni="meshes/spirals/spiral_uni_n"
+inpSpiralUnipert="meshes/spirals/spiral_unipert_n"
+inpSpiralGauss="meshes/spirals/spiral_gauss_n"
+
+inpLoopUni="meshes/loops/loop_uni_n"
+inpLoopUnipert="meshes/loops/loop_unipert_n"
+inpLoopGauss="meshes/loops/loop_gauss_n"
+
+inpParabolaUni="meshes/parabolas/parabola_uni_n"
+inpParabolaUnipert="meshes/parabolas/parabola_unipert_n"
+inpParabolaGauss="meshes/parabolas/parabola_gauss_n"
+
+outCircleUni="rebuild_meshes/circles/circle_uni_n"
+outCircleUnipert="rebuild_meshes/circles/circle_unipert_n"
+outCircleGauss="rebuild_meshes/circles/circle_gauss_n"
+
+outEllipseUni="rebuild_meshes/ellipses/ellipse_uni_n"
+outEllipseUnipert="rebuild_meshes/ellipses/ellipse_unipert_n"
+outEllipseGauss="rebuild_meshes/ellipses/ellipse_gauss_n"
+
+outDeltaUni="rebuild_meshes/deltas/delta_uni_n"
+outDeltaUnipert="rebuild_meshes/deltas/delta_unipert_n"
+outDeltaGauss="rebuild_meshes/deltas/delta_gauss_n"
+
+outSpiralUni="rebuild_meshes/spirals/spiral_uni_n"
+outSpiralUnipert="rebuild_meshes/spirals/spiral_unipert_n"
+outSpiralGauss="rebuild_meshes/spirals/spiral_gauss_n"
+
+outLoopUni="rebuild_meshes/loops/loop_uni_n"
+outLoopUnipert="rebuild_meshes/loops/loop_unipert_n"
+outLoopGauss="rebuild_meshes/loops/loop_gauss_n"
+
+outParabolaUni="rebuild_meshes/parabolas/parabola_uni_n"
+outParabolaUnipert="rebuild_meshes/parabolas/parabola_unipert_n"
+outParabolaGauss="rebuild_meshes/parabolas/parabola_gauss_n"
+
+figCircleUni="info_curv/curv/circles/circle_uni_n"
+figCircleUnipert="info_curv/curv/circles/circle_unipert_n"
+figCircleGauss="info_curv/curv/circles/circle_gauss_n"
+
+figEllipseUni="info_curv/curv/ellipses/ellipse_uni_n"
+figEllipseUnipert="info_curv/curv/ellipses/ellipse_unipert_n"
+figEllipseGauss="info_curv/curv/ellipses/ellipse_gauss_n"
+
+figDeltaUni="info_curv/curv/deltas/delta_uni_n"
+figDeltaUnipert="info_curv/curv/deltas/delta_unipert_n"
+figDeltaGauss="info_curv/curv/deltas/delta_gauss_n"
+
+figSpiralUni="info_curv/curv/spirals/spiral_uni_n"
+figSpiralUnipert="info_curv/curv/spirals/spiral_unipert_n"
+figSpiralGauss="info_curv/curv/spirals/spiral_gauss_n"
+
+figLoopUni="info_curv/curv/loops/loop_uni_n"
+figLoopUnipert="info_curv/curv/loops/loop_unipert_n"
+figLoopGauss="info_curv/curv/loops/loop_gauss_n"
+
+figParabolaUni="info_curv/curv/parabolas/parabola_uni_n"
+figParabolaUnipert="info_curv/curv/parabolas/parabola_unipert_n"
+figParabolaGauss="info_curv/curv/parabolas/parabola_gauss_n"
+
+cd "test_generator"
+python3 simple_test_vtk.py
+cd "../"
+
+make -B
+
+for (( p = 5; p <= 100; p+=5))
+do
+echo "$p"
+./curv -i "$inpCircleUni$p$end1" -o "$outCircleUni$p$end1" -f "circle"  "$figCircleUni$p$end2"
+#./curv -i "$inpCircleGauss$p$end1" -o "$outCircleGauss$p$end1" -f "circle"  "$figCircleGauss$p$end2"
+./curv -i "$inpCircleUnipert$p$end1" -o "$outCircleUnipert$p$end1" -f "circle"  "$figCircleUnipert$p$end2"
+
+./curv -i "$inpEllipseUni$p$end1" -o "$outEllipseUni$p$end1" -f "ellipse"  "$figEllipseUni$p$end2"
+#./curv -i "$inpEllipseGauss$p$end1" -o "$outEllipseGauss$p$end1" -f "ellipse"  "$figEllipseGauss$p$end2"
+./curv -i "$inpEllipseUnipert$p$end1" -o "$outEllipseUnipert$p$end1" -f "ellipse"  "$figEllipseUnipert$p$end2"
+
+./curv -i "$inpSpiralUni$p$end1" -o "$outSpiralUni$p$end1" -f "spiral"  "$figSpiralUni$p$end2"
+#./curv -i "$inpSpiralGauss$p$end1" -o "$outSpiralGauss$p$end1" -f "spiral"  "$figSpiralGauss$p$end2"
+./curv -i "$inpSpiralUnipert$p$end1" -o "$outSpiralUnipert$p$end1" -f "spiral"  "$figSpiralUnipert$p$end2"
+
+#./curv -i "$inpDeltaUni$p$end1" -o "$outDeltaUni$p$end1" -f "delta"  "$figDeltaUni$p$end2"
+#./curv -i "$inpDeltaGauss$p$end1" -o "$outDeltaGauss$p$end1" -f "delta"  "$figDeltaGauss$p$end2"
+#./curv -i "$inpDeltaUnipert$p$end1" -o "$outDeltaUnipert$p$end1" -f "delta"  "$figDeltaUnipert$p$end2"
+
+./curv -i "$inpLoopUni$p$end1" -o "$outLoopUni$p$end1" -f "loop"  "$figLoopUni$p$end2"
+#./curv -i "$inpLoopGauss$p$end1" -o "$outLoopGauss$p$end1" -f "loop"  "$figLoopGauss$p$end2"
+./curv -i "$inpLoopUnipert$p$end1" -o "$outLoopUnipert$p$end1" -f "loop"  "$figLoopUnipert$p$end2"
+
+./curv -i "$inpParabolaUni$p$end1" -o "$outParabolaUni$p$end1" -f "parabola"  "$figParabolaUni$p$end2"
+#./curv -i "$inpParabolaGauss$p$end1" -o "$outParabolaGauss$p$end1" -f "parabola"  "$figParabolaGauss$p$end2"
+./curv -i "$inpParabolaUnipert$p$end1" -o "$outParabolaUnipert$p$end1" -f "parabola"  "$figParabolaUnipert$p$end2"
+done
+
+echo "Making plots"
+
+cd "info_curv"
+python3 make_plots.py
+cd "../"
